@@ -38,6 +38,12 @@ jobs:
       - name: Build frontend
         run: pnpm build
 
+      - name: Upload production-ready build files
+        uses: actions/upload-artifact@v3
+        with:
+          name: production-files
+          path: ./dist
+
   deploy:
     needs: build
     permissions:
