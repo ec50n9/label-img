@@ -4,6 +4,6 @@ import UnoCSS from "unocss/vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/label-img",
+  base: "/label-img/",
   plugins: [vue(), UnoCSS()],
 });
