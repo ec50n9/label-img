@@ -2,29 +2,34 @@ name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
+      # 检出代码
+      - name: 🐧 Check out repository code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      # 安装 Node.js
+      - name: 💡 Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "21.4.0"
 
-      - name: Setup pnpm
+      # 安装 pnpm
+      - name: 🖥️ Setup pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 8
           run_install: false
 
-      - name: Get pnpm store directory
+      # 获取 pnpm 缓存
+      - name: 🔎 Get pnpm store directory
         shell: bash
         run: |
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
-      - name: Cache dependencies
+      # 缓存依赖
+      - name: 🎉 Cache dependencies
         uses: actions/cache@v3
         with:
           path: ${{ env.STORE_PATH }}
@@ -32,73 +37,32 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      # 安装依赖
       - name: Install dependencies
         run: pnpm install
 
+      # 构建
       - name: Build frontend
         run: pnpm build
 
-      - name: Deploy 🚀                         # 第三步：部署
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          folder: dist                         # 部署的目录
-          branch: gh-pages                     # 部署到哪个分支
+          path: "./dist"
 
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
-      # - name: Upload production-ready build files
-      #   uses: actions/upload-artifact@v4
+      # 部署
+      # - name: Deploy 🚀 # 第三步：部署
+      #   uses: JamesIves/github-pages-deploy-action@v4
       #   with:
-      #     name: github-pages
-      #     path: ./dist
+      #     folder: dist # 部署的目录
+      #     branch: gh-pages # 部署到哪个分支
 
-      # - name: Upload Pages artifact
-      #   uses: actions/upload-pages-artifact@v3
-
-  # deploy:
-  #   needs: build
-  #   permissions:
-  #     pages: write
-  #     id-token: write
-  #   environment:
-  #     name: github-pages
-  #     url: ${{ steps.deployment.outputs.page_url }}
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-      # - name: Download artifact
-      #   uses: actions/download-artifact@v3
-      #   with:
-      #     name: production-files
-      #     path: ./dist
-
-      # - name: Deploy to GitHub Pages
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     publish_dir: ./dist
-
-      # - name: Deploy to GitHub Pages
-      #   id: deployment
-      #   uses: actions/deploy-pages@v4
-
-      # - run: echo "🍏 This job's status is ${{ job.status }}."
-
-  # Explore-GitHub-Actions:
-  #   runs-on: ubuntu-latest
-  #   steps:
-      # - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      # - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      # - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      # - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      # - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      # - name: List files in the repository
-      #   run: |
-      #     ls ${{ github.workspace }}
-
-      # - name: Deploy to Github Pages
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     publish_dir: ./dist
-
-      # - run: echo "🍏 This job's status is ${{ job.status }}."
+      # 收工
+      - run: echo "🍏 This job's status is ${{ job.status }}."
