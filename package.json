@@ -1,0 +1,26 @@
+{
+  "name": "label-img",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@leafer-in/editor": "1.0.0-rc.9",
+    "konva": "^9.3.0",
+    "leafer-ui": "1.0.0-rc.9",
+    "vue": "^3.3.11",
+    "vue-konva": "^3.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.5.2",
+    "naive-ui": "^2.36.0",
+    "typescript": "^5.2.2",
+    "unocss": "^0.58.2",
+    "vite": "^5.0.8",
+    "vue-tsc": "^1.8.25"
+  }
+}
