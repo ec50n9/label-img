@@ -1,18 +1,15 @@
-# Vue 3 + TypeScript + Vite
+# Label Image
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+一个用来框选图片中内容位置的小工具。
 
-## Recommended IDE Setup
+[在线预览](https://ec50n9.github.io/label-img/)
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+功能很简单：上传打开一张图片，点击选中橙黄色的选框，然后通过移动、放大缩小等操作，框选你想要知道相对位置的元素，就可以在上方看到位置和尺寸等数据了（点击可以复制）。
 
-## Type Support For `.vue` Imports in TS
+当然你用 ps 或者其他修图工具也可以很轻易的获得这样的数据，并没有什么区别，只是我懒得打开 ps hhhh :D
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+## 预览
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+![Alt text](./docs/imgs/preview.png)
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+以上。

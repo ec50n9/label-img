@@ -5,7 +5,6 @@ import {
   EditorMoveEvent,
   EditorScaleEvent,
 } from "@leafer-in/editor";
-// import "@leafer-in/editor";
 import { computed, onMounted, reactive, ref, watch } from "vue";
 import {
   NUpload,
@@ -13,7 +12,7 @@ import {
   type UploadSettledFileInfo,
 useMessage,
 } from "naive-ui";
-import vue_svg from "../assets/vue.svg";
+import example from "../assets/example.jpg";
 import { calc_scale, file2base64, copy_text } from "../utils";
 
 const message = useMessage();
@@ -41,7 +40,7 @@ const image_info = reactive({
 });
 
 // 预览图片
-const image = Image.one({ url: vue_svg, draggable: false }, 0, 0);
+const image = Image.one({ url: example, draggable: false }, 0, 0);
 image.on(ImageEvent.LOADED, (e: ImageEvent) => {
   const img = e.image;
   const scale = calc_scale(
@@ -75,7 +74,7 @@ const size_text = computed(
 );
 const scope_text = computed(
   () =>
-    `(${selector_state.x.toFixed(2)},${selector_state.y.toFixed(
+    `(${selector_state.x.toFixed(2)}, ${selector_state.y.toFixed(
       2
     )}, ${selector_state.width.toFixed(2)}, ${(
       selector_state.x + selector_state.width
